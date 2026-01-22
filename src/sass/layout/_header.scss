@@ -1,0 +1,12 @@
+@use "../base/typography";
+
+header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+h1 {
+  margin: 0;
+  padding: 0.6rem 1.2rem;
+  font-size: 3.2rem;
+  background-color: rgb(154, 230, 212);
+}

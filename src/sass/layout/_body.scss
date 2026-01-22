@@ -1,0 +1,9 @@
+@use "../base/typography";
+
+body {
+  width: 100vw;
+  min-width: 32rem;
+  height: 100vh;
+  font-family: var(--font-primary);
+  background-color: var(--color-second);
+}
