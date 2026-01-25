@@ -17,16 +17,22 @@
     <nav>
       <button class="add">Add a new book</button>
     </nav>
-    <div class="pop-up">
+    <div class="pop-up hidden">
       <form>
-        <label for="btitle">Title:</label><br />
-        <input type="text" id="connectlater" name="btitle" /><br />
-        <label for="bauthor">Author:</label><br />
-        <input type="text" id="" name="bauthor" /><br />
-        <label for="bpages">Pages:</label><br />
-        <input type="text" id="" name="bpages" /><br />
-        <input class="check" type="checkbox" id="" name="read" />
-        <label for="read" class="last">Read it!</label><br />
+        <label for="btitle">Title:</label>
+        <input type="text" id="btitle" name="btitle" required />
+        <label for="bauthor">Author:</label>
+        <input type="text" id="bauthor" name="bauthor" required />
+        <label for="bpages">Pages:</label>
+        <input type="number" id="bpages" name="bpages" required />
+        <div class="checkbox-wrap">
+          <input class="check" type="checkbox" id="read" name="read" />
+          <label for="read" class="last">Read it!</label>
+        </div>
+        <div class="button-wrap">
+          <button type="submit" value="submit" class="confirm">DONE</button>
+          <button type="button" class="cancel">CANCEL</button>
+        </div>
       </form>
     </div>
     <script src="./src/js/main.js"></script>
