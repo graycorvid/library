@@ -7,3 +7,44 @@ body {
   font-family: var(--font-primary);
   background-color: var(--color-second);
 }
+
+.hidden {
+  display: none;
+}
+.pop-up {
+  height: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid var(--color-accent);
+  border-radius: 10px;
+  background-color: var(--color-fourth);
+}
+
+form {
+  display: grid;
+  height: 100%;
+  align-content: start;
+  padding: 2rem 1.2rem;
+  & > input {
+    margin-bottom: 1.2rem;
+  }
+  & > label {
+    margin-bottom: 0.4rem;
+  }
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.button-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2rem;
+}
+
+.button-wrap button:hover {
+  background-color: var(--color-fifth);
+}
