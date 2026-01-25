@@ -1,4 +1,5 @@
 @use "../base/typography";
+@use "../abstracts/variables";
 
 body {
   width: 100vw;
@@ -47,4 +48,24 @@ input[type="checkbox"] {
 
 .button-wrap button:hover {
   background-color: var(--color-fifth);
+}
+
+.library {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.tile {
+  margin: 2rem 1rem;
+  padding: 1rem 1rem;
+  width: 18rem;
+  height: 20rem;
+  word-wrap: break-word;
+  font-size: 1.6rem;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 10px;
+  background-color: var(--color-fourth);
+  & > button {
+    margin-bottom: 0.4rem;
+    width: 80%;
+  }
 }
