@@ -4,3 +4,30 @@ body {
   grid-template-columns: 20% 80%;
   grid-template-rows: 10% 90%;
 }
+
+header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+nav {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+form {
+  align-content: start;
+}
+
+.button-wrap {
+  grid-template-columns: 1fr 1fr;
+}
+.library {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
