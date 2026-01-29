@@ -1,31 +1,17 @@
 "use strict";
 const body = document.querySelector("body");
 const btnAdd = document.querySelector(".add");
-const btnConfirm = document.querySelector("button.confirm");
-const btnCancel = document.querySelector("button.cancel");
+const btnConfirm = document.querySelector(".confirm");
+const btnCancel = document.querySelector(".cancel");
 const popup = document.querySelector(".pop-up");
 const form = document.querySelector("form");
+const library = document.querySelector(".library");
 const titleInfo = document.querySelector("input[name=btitle]");
 const authorInfo = document.querySelector("input[name=bauthor]");
 const pagesInfo = document.querySelector("input[name=bpages]");
 const readInfo = document.querySelector("input[class=check]");
 
-const myLibrary = [
-  {
-    title: "Zmierzch",
-    author: "Stephenie Meyer",
-    pages: 435,
-    read: "Read: yes",
-    id: "23-23-re-23",
-  },
-  {
-    title: "Uzumaki",
-    author: "Junji Ito",
-    pages: 435,
-    read: "Read: yes",
-    id: "23-24-tr-23",
-  },
-];
+const myLibrary = [];
 
 function Book(title, author, pages, read, id) {
   if (!new.target) {
@@ -37,37 +23,108 @@ function Book(title, author, pages, read, id) {
   this.read = read;
   this.id = id;
 }
-//OPEN POP UP
+
 function openNewBookWindow() {
   popup.classList.remove("hidden");
 }
-//CLOSE POP UP AND CLEAN FORM
+
 function closeNewBookWindow(event) {
   event.preventDefault();
   form.reset();
   popup.classList.add("hidden");
 }
-//GRAB INFO FROM FORM AND SEND TO PROCESS
+
 function grabBookInfo(event) {
-  event.preventDefault(event);
   let title = titleInfo.value;
   let author = authorInfo.value;
   let pages = pagesInfo.value;
-  let read = readInfo.checked ? "Read: yes" : "Read: no";
+  let read = readInfo.checked ? "Read" : "Not read";
   let id = crypto.randomUUID();
-
-  addBookToLibrary(title, author, pages, read, id);
+  if (title && author && pages) {
+    addBookToLibrary(title, author, pages, read, id, event);
+  }
 }
-//ADD TO ARRAY
-function addBookToLibrary(title, author, pages, read, id) {
-  // take params, create a book then store it in the array
+
+function addBookToLibrary(title, author, pages, read, id, event) {
   let book = new Book(title, author, pages, read, id);
   myLibrary.push(book);
-  console.log(myLibrary);
+  closeNewBookWindow(event);
+  createLibrary();
 }
-//CREATE BOOK TILE FROM ARRAY
+
 function createLibrary() {
-  myLibrary.forEach((book) => {});
+  library.innerHTML = "";
+
+  myLibrary.forEach((book) => {
+    let newBook = document.createElement("div");
+    newBook.setAttribute("data-id", `${book.id}`);
+    newBook.classList.add("tile");
+
+    let titleP = document.createElement("p");
+    titleP.classList.add("ntitle");
+    titleP.innerText = book.title;
+
+    let authorP = document.createElement("p");
+    authorP.classList.add("nauthor");
+    authorP.innerText = book.author;
+
+    let pagesP = document.createElement("p");
+    pagesP.classList.add("npages");
+    pagesP.innerText = book.pages;
+
+    let readBtn = document.createElement("button");
+    readBtn.innerText = book.read;
+
+    if (book.read === "Read") {
+      readBtn.classList.add("read");
+    } else {
+      readBtn.classList.add("unread");
+    }
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "DELETE";
+    deleteBtn.classList.add("ndelete");
+
+    library.append(newBook);
+    newBook.append(titleP, authorP, pagesP, readBtn, deleteBtn);
+
+    readBtn.addEventListener("click", changeReadStatus);
+    deleteBtn.addEventListener("click", deleteBook);
+  });
+}
+
+function changeReadStatus(e) {
+  let dataId = e.target.parentNode.getAttribute("data-id");
+  if (e.target.innerHTML === "Read") {
+    e.target.innerHTML = "Not read";
+    e.target.classList.replace("read", "unread");
+    myLibrary.forEach((book) => {
+      if (book.id === dataId) {
+        book.read = "Not read";
+      }
+    });
+  } else {
+    e.target.innerHTML = "Read";
+    e.target.classList.replace("unread", "read");
+    myLibrary.forEach((book) => {
+      if (book.id === dataId) {
+        book.read = "Read";
+      }
+    });
+  }
+}
+
+function deleteBook(e) {
+  let index;
+  let dataId = e.target.parentNode.getAttribute("data-id");
+  myLibrary.forEach((book) => {
+    if (book.id === dataId) {
+      index = myLibrary.indexOf(book);
+    }
+  });
+
+  myLibrary.splice(index, 1);
+  e.target.parentNode.remove();
 }
 
 btnAdd.addEventListener("click", openNewBookWindow);
