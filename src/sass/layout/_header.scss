@@ -1,13 +1,10 @@
 @use "../base/typography";
 @use "../abstracts/variables";
 
-header {
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
 h1 {
   margin: 0;
   padding: 0.6rem 1.2rem;
+  min-width: 100vw;
   font-size: 3.2rem;
   background-color: var(--color-bgc);
 }
