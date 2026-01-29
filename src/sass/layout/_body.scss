@@ -9,6 +9,10 @@ body {
   background-color: var(--color-second);
 }
 
+.library {
+  padding-left: 3rem;
+}
+
 .hidden {
   display: none;
 }
@@ -26,7 +30,6 @@ body {
 form {
   display: grid;
   height: 100%;
-  align-content: start;
   padding: 2rem 1.2rem;
   & > input {
     margin-bottom: 1.2rem;
@@ -42,7 +45,6 @@ input[type="checkbox"] {
 
 .button-wrap {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   margin-top: 2rem;
 }
 
@@ -50,10 +52,6 @@ input[type="checkbox"] {
   background-color: var(--color-fifth);
 }
 
-.library {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
 .tile {
   margin: 2rem 1rem;
   padding: 1rem 1rem;
@@ -68,4 +66,24 @@ input[type="checkbox"] {
     margin-bottom: 0.4rem;
     width: 80%;
   }
+}
+
+.read {
+  background-color: var(--color-read);
+  border-color: var(--color-read-accent);
+}
+.read:hover {
+  background-color: var(--color-read-hover);
+}
+.unread {
+  background-color: var(--color-unread);
+  border-color: var(--color-read-unaccent);
+}
+.unread:hover {
+  background-color: var(--color-unread-hover);
+}
+
+.ndelete:hover {
+  background-color: var(--color-delete);
+  border-color: var(--color-unread-accent);
 }
