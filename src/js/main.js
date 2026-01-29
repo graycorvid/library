@@ -24,6 +24,14 @@ function Book(title, author, pages, read, id) {
   this.id = id;
 }
 
+Book.prototype.changeReadStatus = function () {
+  if (this.read === "Read") {
+    this.read = "Not read";
+  } else {
+    this.read = "Read";
+  }
+};
+
 function openNewBookWindow() {
   popup.classList.remove("hidden");
 }
@@ -88,30 +96,25 @@ function createLibrary() {
     library.append(newBook);
     newBook.append(titleP, authorP, pagesP, readBtn, deleteBtn);
 
-    readBtn.addEventListener("click", changeReadStatus);
+    readBtn.addEventListener("click", toggleReadButton);
     deleteBtn.addEventListener("click", deleteBook);
   });
 }
 
-function changeReadStatus(e) {
+function toggleReadButton(e) {
   let dataId = e.target.parentNode.getAttribute("data-id");
-  if (e.target.innerHTML === "Read") {
-    e.target.innerHTML = "Not read";
-    e.target.classList.replace("read", "unread");
-    myLibrary.forEach((book) => {
-      if (book.id === dataId) {
-        book.read = "Not read";
+  myLibrary.forEach((book) => {
+    if (book.id === dataId) {
+      book.changeReadStatus();
+      if (book.read === "Read") {
+        e.target.innerHTML = "Read";
+        e.target.classList.replace("unread", "read");
+      } else {
+        e.target.innerHTML = "Not read";
+        e.target.classList.replace("read", "unread");
       }
-    });
-  } else {
-    e.target.innerHTML = "Read";
-    e.target.classList.replace("unread", "read");
-    myLibrary.forEach((book) => {
-      if (book.id === dataId) {
-        book.read = "Read";
-      }
-    });
-  }
+    }
+  });
 }
 
 function deleteBook(e) {
